@@ -1,151 +1,76 @@
-var updateTime = setInterval(showTimeDay, 1000);
 
-//showing time and day
-function showTimeDay() {
-  var today = new Date();
-  var time = today.getHours() + ":" + today.getMinutes();
+function _(id) {
+  return document.querySelector(id);
+}
 
-  document.getElementById("topTime").innerHTML = time;
-
-  document.getElementById("time").innerHTML = time;
-
-  var weekDays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+setInterval(() => {
+  let today = new Date();
+  let day = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
   ];
-  document.getElementById("day").innerHTML = weekDays[today.getDay()];
-}
+  _("#day").textContent = `${day[today.getDay()]}`;
+  _("#timeS").textContent = `${String(
+    today.getHours()
+  ).padStart(2, "0")}:${String(today.getMinutes()).padStart(2, "0")}`;
+  _("#timeB").textContent = `${String(
+    today.getHours()
+  ).padStart(2, "0")}:${String(today.getMinutes()).padStart(2, "0")}`;
+}, 1000);
 
-let message = document.getElementById("messageDisplay");
-let innerMsg = document.getElementById("innermessage");
-let hr = document.createElement("hr");
-var msg = document.createElement("p");
-
-function showMessage() {
-  document.getElementById("timeDisplay").style.display = "none";
-  document.getElementById("musicDisplay").style.display = "none";
-  document.getElementById("messageDisplay").style.display = "block";
-  document.getElementById("music").style.color = "gray";
-  document.getElementById("clock").style.color = "gray";
-  document.getElementById("message").style.color = "white";
-}
-function showJavaMsg() {
-  document.getElementById("btnMessage").disabled = true;
-  document.getElementById("btnMusic").disabled = true;
-  message.style.display = "none";
-  innerMsg.style.display = "block";
-  msg.innerText =
-    "Java is high-level programming language developed by sun Microsystems";
-  innerMsg.appendChild(msg);
-  innerMsg.appendChild(hr);
-}
-function showHtmlMsg() {
-  msg.innerText = "";
-  document.getElementById("btnMessage").disabled = true;
-  document.getElementById("btnMusic").disabled = true;
-  message.style.display = "none";
-  innerMsg.style.display = "block";
-  msg.innerText =
-    "HTML stands for Hyper Text Markup Language. HTML describes the structure of a Web page.";
-  innerMsg.appendChild(msg);
-  innerMsg.appendChild(hr);
-}
-function showCssMsg() {
-  msg.innerText = "";
-  document.getElementById("btnMessage").disabled = true;
-  document.getElementById("btnMusic").disabled = true;
-  message.style.display = "none";
-  innerMsg.style.display = "block";
-  msg.innerText = "Css is a cascading style sheet used for styling purpose.";
-  innerMsg.appendChild(msg);
-  innerMsg.appendChild(hr);
-}
-function showWatch() {
-  msg.innerText = "";
-  document.getElementById("btnMessage").disabled = false;
-  document.getElementById("btnMusic").disabled = false;
-  document.getElementById("messageDisplay").style.display = "none";
-  document.getElementById("musicDisplay").style.display = "none";
-
-  innerMsg.style.display = "none";
-  document.getElementById("timeDisplay").style.display = "block";
-  showTimeDay();
-  document.getElementById("music").style.color = "white";
-  document.getElementById("clock").style.color = "white";
-  document.getElementById("message").style.color = "white";
-}
-
-var tracks = [
-  {
-    id: "1",
-    name: "Sorry",
-    trackSrc:"assests\[iSongs.info] 01 - Sorry.mp3",
-    artist: "JB",
-    imgSrc: "https://i0.wp.com/10to5.in/wp-content/uploads/2020/07/Premam-Lyrics.jpg?resize=696%2C425&ssl=1",
-  },
-  {
-    id: "2",
-    name: "Despacito",
-    trackSrc: "assests\[iSongs.info] 03 - Despacito.mp3",
-    artist: "JB",
-    imgSrc: "https://naalyrics.com/wp-content/uploads/2021/02/Despacito.jpg",
-  },
-  {
-    id: "3",
-    name: "No Lie",
-    trackSrc: "assests\nolie.mp3",
-    artist: "DL",
-    imgSrc: "https://i.ytimg.com/vi/oE1sxXPNbrI/maxresdefault.jpg",
-  },
- 
+// Messages 
+let msgList = [
+  "Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.",
+  "Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in a markup language such as HTML.",
+  "The HyperText Markup Language, or HTML is the standard markup language for documents designed to be displayed in a web browser.",
+  "JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification.",
+  "React is a free and open-source front-end JavaScript library for building user interfaces or UI components. It is maintained by Facebook and a community of individual developers and companies."
 ];
-function playMusic() {
-  document.getElementById("timeDisplay").style.display = "none";
-  document.getElementById("messageDisplay").style.display = "none";
-  document.getElementById("musicDisplay").style.display = "block";
-  document.getElementById("message").style.color = "gray";
-  document.getElementById("clock").style.color = "gray";
-  document.getElementById("music").style.color = "white";
+
+let selectMsg = (msgId) => {
+  let msg = _("#showMsg");
+  msg.style.display = "block";
+  msg.textContent = msgList[msgId - 1];
+};
+
+// Media Player
+let smsState, musicState, watchState;
+smsState = musicState = watchState = false;
+
+function selectScreen(scr) {
+  setOff();
+  let icons = _(".icons").childNodes;
+  switch (scr) {
+      case 0:
+          _(".timeB").style.display = "flex";
+          break;
+      case 1:
+          _(".sms").style.display = "flex";
+          icons[scr].style.opacity = 1;
+          break;
+      case 3:
+          _(".media").style.display = "flex";
+          icons[scr].style.opacity = 1;
+          break;
+  }
 }
 
-let play = document.getElementById("play-pause");
-let ol = document.getElementById("orderList");
+function setOff() {
+  let icons = _(".icons").childNodes;
+  icons[1].style.opacity = 0.5;
+  icons[3].style.opacity = 0.5;
+  icons[5].style.opacity = 0.5;
+  _(".timeB").style.display = "none";
+  _(".sms").style.display = "none";
+  _(".media").style.display = "none";
+}
 
-tracks.forEach((track) => {
-  let li = document.createElement("li");
-  var audio = document.querySelector("audio");
-  li.innerHTML =
-    track.id + " . " + track.name + "<span>- " + track.artist + "</span>";
-  var img = document.getElementById("songimg");
-
-  li.onclick = function () {
-    var trackname = document.getElementById("trackname");
-    trackname.innerText = track.name;
-
-    img.setAttribute("src", track.imgSrc);
-
-    audio.pause();
-    audio.setAttribute("src", track.trackSrc);
-    audio.load();
-    audio.play();
-    play.innerHTML = "Pause";
-  };
-
-  ol.appendChild(li);
-});
-//changing state of button
-function playtrack() {
-  let audio = document.querySelector("audio");
-  if (audio.paused) {
-    play.innerHTML = "Pause";
-    audio.play();
-  } else {
-    play.innerHTML = "Play";
-    audio.pause();
-  }
+function selectSong(sid) {
+  _("#song").src = `./songs/s${sid}.mp3`;
+  _("#simg").src = `./img/s${sid}.jpg`;
 }
