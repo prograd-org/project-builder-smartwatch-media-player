@@ -56,3 +56,4 @@ setInterval(() => {
       document.querySelector("#song").src = `./Songs/s${id}.mp3`;
       document.querySelector("#art").src = `./Image/i${id}.jpg`;
     }
+ 
