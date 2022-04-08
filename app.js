@@ -8,7 +8,7 @@ setInterval(() => {
     document.getElementById("time").innerHTML=hour+":"+min;
     document.getElementById("day").innerHTML=daylist[day];
     },1000);
-  
+   
   let msgList = [
       "Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.",
       "Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in a markup language such as HTML.",
