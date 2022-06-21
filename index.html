@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Watch-MediaPlayer</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+     <div class="black">
+         <h1 class="head">SmartWatch</h1>
+    </div>
+    <div class="white">
+        <div class="watch">
+            <p id="t" onclick="selectScreen(0)"></p>
+            <div class="screen">
+            <div class="time">
+                <p id="time"></p>
+                <p id="day"></p> 
+            </div>
+            <div class="sms">
+                
+                <p onclick="selectMsg(1)">CSS</p>
+                <p onclick="selectMsg(2)">HTML</p>
+                <p onclick="selectMsg(3)">JavaScript</p>
+                <p id="showMsg"></p>
+            </div>
+            <div class="media">
+                <div class="mtop">
+                    <div class="mleft"><img src="./Icon/i1.jpg" style="width: 100%;height: 100%;" id="art">
+                    </div>
+                    <div class="mright">
+                        <audio src="./song/s1.mp3" controls id="song"></audio>
+                    </div>
+                </div>
+                <div class="mbottom">
+                    <div class="song" onclick="selectSong(1)">
+                        <p>1&nbsp;&nbsp;&nbsp;Flame Sttart Over</p>
+                        <p>3:22</p>
+                    </div>
+                    <div class="song" onclick="selectSong(2)">
+                        <p>2&nbsp;&nbsp;&nbsp;Let ME Down Slowly</p>
+                        <p>2:49</p>
+                    </div>
+                    <div class="song" onclick="selectSong(3)">
+                        <p>3&nbsp;&nbsp;&nbsp;Vaanam</p>
+                        <p>3:45</p>
+                    </div>
+                    <div class="song" onclick="selectSong(4)">
+                        <p>4&nbsp;&nbsp;&nbsp;I will be there for yoy</p>
+                        <p>3:27</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="icons">
+                <img src="./Icon/chats.png" onclick="selectScreen(1)">
+                <img src="./Icon/music.png" onclick="selectScreen(3)">
+                <img src="./Icon/timer.png" onclick="selectScreen(5)">
+            </div>
+            <div class="watchBack"></div>
+        </div>
+        
+    </div>
+</div>
+    <script src="./app.js"></script>
+</body>
+</html>
